@@ -555,6 +555,9 @@ function wsl_process_login_get_user_data( $provider, $redirect_to )
 	// check if user already exist in wslusersprofiles
 	$user_id = (int) wsl_get_stored_hybridauth_user_id_by_provider_and_provider_uid( $provider, $hybridauth_user_profile->identifier );
 
+    if (!$user_id && $wordpress_user_id) {
+        $user_id = $wordpress_user_id;
+    }
 	// if not found in wslusersprofiles, then check his verified email
 	if( ! $user_id && ! empty( $hybridauth_user_profile->emailVerified ) )
 	{
